@@ -1,3 +1,13 @@
+## command
+
+- ローカルdevサーバ起動
+  $ npm run dev
+    -> http://localhost:3000
+  ※ 登録済みTODOとしてamplifyデプロイアプリで追加したものが表示された
+    ⇒　バックエンドは（amplify_outputs.json）に登録されたAWSリソースに接続されているらしい
+
+---
+
 ## AWS Amplify Next.js (App Router) Starter Template
 
 This repository provides a starter template for creating applications using Next.js (App Router) and AWS Amplify, emphasizing easy setup for authentication, API, and database capabilities.
