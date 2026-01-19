@@ -15,12 +15,12 @@ const client = generateClient<Schema>();
 
 export default function App() {
   const [todos, setTodos] = useState<Array<Schema["Todo"]["type"]>>([]);
-    
+
   const { signOut } = useAuthenticator();
 
   function listTodos() {
     client.models.Todo.observeQuery().subscribe({
-      next: (data) => setTodos([...data.items]),
+      next: data => setTodos([...data.items]),
     });
   }
 
@@ -33,9 +33,9 @@ export default function App() {
       content: window.prompt("Todo content"),
     });
   }
-    
+
   function deleteTodo(id: string) {
-    client.models.Todo.delete({ id })
+    client.models.Todo.delete({ id });
   }
 
   return (
@@ -43,11 +43,10 @@ export default function App() {
       <h1>My todos</h1>
       <button onClick={createTodo}>+ new</button>
       <ul>
-        {todos.map((todo) => (
-          <li 
-            key={todo.id}
-            onClick={() => deleteTodo(todo.id)}
-          >{todo.content}</li>
+        {todos.map(todo => (
+          <li key={todo.id} onClick={() => deleteTodo(todo.id)}>
+            {todo.content}
+          </li>
         ))}
       </ul>
       <div>
