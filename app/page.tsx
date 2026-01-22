@@ -7,21 +7,21 @@ export default function App() {
   const { user, signOut } = useAuthenticator();
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-purple-100 to-white flex flex-col items-center justify-center p-8">
-      <div className="bg-white rounded-lg shadow-xl p-8 max-w-md w-full">
-        <h1 className="text-4xl font-bold text-purple-600 mb-4 text-center">APP HOME</h1>
-        <p className="text-gray-700 mb-8 text-center">
+    <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-purple-100 to-white p-8">
+      <div className="w-full max-w-md rounded-lg bg-white p-8 shadow-xl">
+        <h1 className="mb-4 text-center text-4xl font-bold text-purple-600">APP HOME</h1>
+        <p className="mb-8 text-center text-gray-700">
           Welcome, <span className="font-semibold">{user?.signInDetails?.loginId}</span>
         </p>
 
-        <div className="flex gap-4 mb-6">
+        <div className="mb-6 flex gap-4">
           <Link href="/chat" className="flex-1">
-            <button className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg transition duration-200 shadow-md">
+            <button className="w-full rounded-lg bg-blue-500 px-6 py-3 font-semibold text-white shadow-md transition duration-200 hover:bg-blue-600">
               💬 Chat
             </button>
           </Link>
           <Link href="/todo" className="flex-1">
-            <button className="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-6 rounded-lg transition duration-200 shadow-md">
+            <button className="w-full rounded-lg bg-green-500 px-6 py-3 font-semibold text-white shadow-md transition duration-200 hover:bg-green-600">
               ✓ Todo
             </button>
           </Link>
@@ -29,7 +29,7 @@ export default function App() {
 
         <button
           onClick={signOut}
-          className="w-full bg-gray-500 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-200"
+          className="w-full rounded-lg bg-gray-500 px-4 py-2 font-semibold text-white transition duration-200 hover:bg-gray-600"
         >
           Sign out
         </button>
