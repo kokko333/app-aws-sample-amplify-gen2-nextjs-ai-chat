@@ -14,9 +14,9 @@ Amplify.configure(outputs);
 const client = generateClient<Schema>();
 
 export default function App() {
-  const [todos, setTodos] = useState<Array<Schema["Todo"]["type"]>>([]);
+  // --- データ管理
 
-  const { user, signOut } = useAuthenticator();
+  const [todos, setTodos] = useState<Array<Schema["Todo"]["type"]>>([]);
 
   function listTodos() {
     client.models.Todo.observeQuery().subscribe({
@@ -37,6 +37,10 @@ export default function App() {
   function deleteTodo(id: string) {
     client.models.Todo.delete({ id });
   }
+
+  // --- 認証管理
+
+  const { user, signOut } = useAuthenticator();
 
   return (
     <main>
