@@ -1,3 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* ログインUIを上下左右中央ぞろえにする */
+[data-amplify-authenticator] {
+  height: 100vh;
+}
+
+/* Amplify UIのカラーテーマをカスタマイズ */
+:root,
+[data-amplify-theme] {
+  --amplify-colors-primary-80: oklch(59.6% 0.145 163.225); /* emerald-600 */
+  --amplify-colors-primary-90: oklch(50.8% 0.118 165.612); /* emerald-700 */
+  --amplify-colors-border-focus: oklch(50.8% 0.118 165.612);
+}
