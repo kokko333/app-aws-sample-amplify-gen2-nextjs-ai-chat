@@ -1,4 +1,4 @@
-"use client";
+"use client"; // クライアントサイドで実行される
 
 import { useAuthenticator } from "@aws-amplify/ui-react";
 import Link from "next/link";
@@ -15,7 +15,7 @@ export default function App() {
         </p>
 
         <div className="mb-6 flex gap-4">
-          <Link href="/chat" className="flex-1">
+          <Link href="/chat/new" className="flex-1">
             <button className="w-full rounded-lg bg-blue-500 px-6 py-3 font-semibold text-white shadow-md transition duration-200 hover:bg-blue-600">
               💬 Chat
             </button>
