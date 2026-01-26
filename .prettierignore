@@ -1,0 +1,8 @@
+# settings
+*.d.ts
+*.js
+*.json
+
+# docs
+*.md
+LICENSE
