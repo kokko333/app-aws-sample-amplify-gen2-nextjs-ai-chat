@@ -6,7 +6,7 @@ import type { Conversation, Message } from "../_types/chat";
 import MessageList from "../_components/MessageList";
 import ChatInput from "../_components/ChatInput";
 // import { fetchConversation } from "../api/chat";
-// import { callBedrockChat } from "../api/bedrock";
+import { callBedrockChat } from "../_actions/callModel";
 import { useConversationsContext } from "../_context/ConversationsContext";
 
 export default function ChatConversation() {
@@ -109,9 +109,7 @@ export default function ChatConversation() {
     setIsLoadingAIResponse(true);
     let newAssistantMessage: Message;
     try {
-      // TODO: BedrockチャットAPIの実装
-      //   const aiResponse = await callBedrockChat(message, model, conversationId ?? "");
-      const aiResponse = "これはAIからのサンプル応答です。";
+      const aiResponse = await callBedrockChat(message, model, conversationId ?? "");
 
       newAssistantMessage = {
         id: `message-${self.crypto.randomUUID()}`,
