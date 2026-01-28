@@ -199,7 +199,7 @@ export default function ChatConversation() {
       </div>
 
       <div className="flex flex-1 justify-center overflow-y-auto bg-white">
-        <div className="w-3xl">
+        <div className="w-full max-w-3xl">
           <MessageList messages={conversation.messages} />
           {/* ローディングインジケーターの表示を追加 */}
           {isLoadingAIResponse && (
@@ -210,7 +210,7 @@ export default function ChatConversation() {
           <div ref={messagesEndRef} />
         </div>
       </div>
-      <div className="w-3xl mx-auto bg-white px-4 py-3">
+      <div className="mx-auto w-full max-w-3xl bg-white px-4 py-3">
         <ChatInput
           sendMessage={sendMessage}
           initialModel={selectedModel}
