@@ -38,7 +38,7 @@
     - クリーンアップ
       $ npx ampx sandbox delete
 ```
-PS C:\Users\kokko\Documents\Practice_Infra_AWS\app-aws-sample-amplify-gen2-nextjs> npx ampx sandbox
+... /app-aws-sample-amplify-gen2-nextjs-ai-chat> npx ampx sandbox
 
 Amplify Sandbox
   Identifier:   kokko
