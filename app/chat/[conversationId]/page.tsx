@@ -5,7 +5,7 @@ import { useParams } from "next/navigation";
 import type { Conversation, Message } from "../_types/chat";
 import MessageList from "../_components/MessageList";
 import ChatInput from "../_components/ChatInput";
-// import { fetchConversation } from "../api/chat";
+import { fetchConversation } from "../_actions/fetchChatData";
 import { callBedrockChat } from "../_actions/callModel";
 import { useConversationsContext } from "../_context/ConversationsContext";
 
@@ -64,9 +64,7 @@ export default function ChatConversation() {
     if (!conversationId) return;
     setIsConversationLoading(true);
     try {
-      // TODO: 会話履歴取得APIの実装
-      //   const conversation = await fetchConversation(conversationId);
-      const conversation: Conversation = conversations.find(c => c.id === "sampleID-1")!;
+      const conversation = await fetchConversation(conversationId);
 
       setConversation(conversation);
     } catch (error) {
@@ -78,7 +76,6 @@ export default function ChatConversation() {
   };
 
   useEffect(() => {
-    // TODO: 会話履歴管理の実装
     // ローカル起動(npm run dev)では Next.js の React Strict Mode により
     // useEffect 内の処理が2回実行されてしまうため、2回目以降はスキップする
     if (hasInitialized.current === conversationId) {
@@ -98,8 +95,7 @@ export default function ChatConversation() {
   // --- AIの応答を取得する
 
   const [isLoadingAIResponse, setIsLoadingAIResponse] = useState(false);
-  // const { notifyConversationCreated } = useConversationsContext();
-  const { notifyConversationCreated, conversations } = useConversationsContext(); // TODO: getConversation API 実装
+  const { notifyConversationCreated } = useConversationsContext();
 
   const getAIResponse = async (
     message: string,

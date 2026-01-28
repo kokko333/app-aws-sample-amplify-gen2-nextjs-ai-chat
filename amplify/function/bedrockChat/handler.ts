@@ -49,7 +49,7 @@ export const handler: ChatSchema["BedrockChat"]["functionHandler"] = async event
     const title =
       prompt.length > MAX_TITLE_LENGTH ? prompt.substring(0, MAX_TITLE_LENGTH) : prompt;
     if (conversationId) {
-      // 会話データを更新または保存
+      // 会話のメタ情報を更新または保存
       await saveConversation(conversationId, title, owner);
       // ユーザーのメッセージを保存
       await saveMessage(conversationId, "user", prompt, owner);
@@ -128,12 +128,12 @@ function getISOString(): string {
 }
 
 /**
- * 会話情報をDynamoDBに保存する。
+ * 会話のメタ情報をDynamoDBに保存する。
  * 既に存在する場合は「更新日時」を更新する。
  *
  * @param conversationId 会話ID
  * @param title 会話タイトル
- * @param owner 会話の実施ユーザー
+ * @param owner 会話の実施ユーザー情報
  */
 async function saveConversation(conversationId: string, title: string, owner: string) {
   try {
@@ -179,7 +179,7 @@ async function saveConversation(conversationId: string, title: string, owner: st
  * @param conversationId 会話ID
  * @param sender メッセージの送信者（"user" または "assistant"）
  * @param content メッセージの内容
- * @param owner 会話の実施ユーザー
+ * @param owner 会話の実施ユーザーの情報
  */
 async function saveMessage(
   conversationId: string,
@@ -212,7 +212,7 @@ async function saveMessage(
 /**
  * DynamoDBから会話履歴を取得する
  *
- * @param conversationId - メッセージを取得する会話のID
+ * @param conversationId メッセージを取得する会話のID
  * @returns {Promise<Message[]>} Bedrock API用にフォーマットされたメッセージの配列
  */
 async function getConversationHistory(conversationId: string): Promise<Message[]> {
