@@ -1,4 +1,4 @@
-import type { ChatSchema } from "../../data/resource";
+import type { Schema } from "../../data/resource";
 import {
   BedrockRuntimeClient,
   ConverseCommand,
@@ -33,7 +33,7 @@ const MESSAGE_TABLE = process.env.MESSAGE_TABLE_NAME;
  * @param event Bedrockへの問い合わせ情報・会話情報
  * @returns {string} bedrockが生成したテキスト回答
  */
-export const handler: ChatSchema["BedrockChat"]["functionHandler"] = async event => {
+export const handler: Schema["BedrockChat"]["functionHandler"] = async event => {
   const prompt = event.arguments.prompt;
   const modelId = event.arguments.modelId;
   const conversationId = event.arguments.conversationId;

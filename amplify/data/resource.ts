@@ -1,11 +1,9 @@
 import { type ClientSchema, a, defineData } from "@aws-amplify/backend";
 import { bedrockChatFunction } from "../function/bedrockChat/resource";
 
-//////////////////////////////////////////////////////////////////////////////
-// AIチャットモデルの定義
-//////////////////////////////////////////////////////////////////////////////
+const schema = a.schema({
+  // --- AIチャットモデル ---
 
-const chatSchema = a.schema({
   Message: a
     .model({
       conversationId: a.id().required(),
@@ -38,21 +36,9 @@ const chatSchema = a.schema({
     .returns(a.string())
     .authorization(allow => [allow.authenticated()])
     .handler(a.handler.function(bedrockChatFunction)),
-});
 
-export type ChatSchema = ClientSchema<typeof chatSchema>;
+  // --- TODOモデル ---
 
-export const chatData = defineData({
-  schema: chatSchema,
-  logging: true,
-});
-
-//////////////////////////////////////////////////////////////////////////////
-// TODOモデルの定義
-//////////////////////////////////////////////////////////////////////////////
-
-// GraphQL (AppSync Resolvers) + DynamoDB
-const todoSchema = a.schema({
   Todo: a
     .model({
       content: a.string(),
@@ -60,10 +46,10 @@ const todoSchema = a.schema({
     .authorization(allow => [allow.owner()]), // 所有者自身からのデータアクセスに限定
 });
 
-export type TodoSchema = ClientSchema<typeof todoSchema>;
+export type Schema = ClientSchema<typeof schema>;
 
-export const todoData = defineData({
-  schema: todoSchema,
+export const data = defineData({
+  schema,
   authorizationModes: {
     // // APIキー認証
     // defaultAuthorizationMode: "apiKey",
@@ -74,4 +60,5 @@ export const todoData = defineData({
     // Cognitoユーザー認可
     defaultAuthorizationMode: "userPool",
   },
+  logging: true,
 });

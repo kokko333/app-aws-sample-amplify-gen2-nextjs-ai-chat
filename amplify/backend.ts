@@ -2,13 +2,12 @@ import { defineBackend } from "@aws-amplify/backend";
 import { Tags } from "aws-cdk-lib";
 import { Effect, PolicyStatement } from "aws-cdk-lib/aws-iam";
 import { auth } from "./auth/resource.js";
-import { chatData, todoData } from "./data/resource.js";
+import { data } from "./data/resource.js";
 import { bedrockChatFunction } from "./function/bedrockChat/resource.js";
 
 const backend = defineBackend({
   auth,
-  chatData,
-  todoData,
+  data,
   bedrockChatFunction,
 });
 
@@ -22,11 +21,11 @@ tags.add("Environment", "development");
 // テーブル名
 backend.bedrockChatFunction.addEnvironment(
   "CONVERSATION_TABLE_NAME",
-  backend.chatData.resources.tables["Conversation"].tableName
+  backend.data.resources.tables["Conversation"].tableName
 );
 backend.bedrockChatFunction.addEnvironment(
   "MESSAGE_TABLE_NAME",
-  backend.chatData.resources.tables["Message"].tableName
+  backend.data.resources.tables["Message"].tableName
 );
 
 // --- AI Chat Lambda への権限付与
@@ -50,8 +49,8 @@ backend.bedrockChatFunction.resources.lambda.addToRolePolicy(
     effect: Effect.ALLOW,
     actions: ["dynamodb:PutItem", "dynamodb:UpdateItem", "dynamodb:Query"],
     resources: [
-      backend.chatData.resources.tables["Conversation"].tableArn,
-      backend.chatData.resources.tables["Message"].tableArn,
+      backend.data.resources.tables["Conversation"].tableArn,
+      backend.data.resources.tables["Message"].tableArn,
     ],
   })
 );
